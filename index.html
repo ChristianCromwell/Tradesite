@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Investissement</title>
+  <!-- Lien vers la feuille de style externe -->
+  <style>
+    /* Mise à zéro du margin/padding par défaut */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Corps de la page : fond sombre, police par défaut */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1a;
+      /* Fond sombre */
+    }
+
+    /* Conteneur pour centrer la carte en plein écran */
+    .container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      /* Centrage horizontal */
+      align-items: center;
+      /* Centrage vertical */
+    }
+
+    /* Carte (encart) */
+    .card {
+      background-color: #2f2f2f;
+      /* Gris foncé */
+      border-radius: 8px;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+    }
+
+    /* Titre */
+    .card h1 {
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    /* Champ de saisie */
+    .card input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 4px;
+      outline: none;
+      background-color: #f5f5f5;
+    }
+
+    /* Bouton Valider */
+    .card button {
+      width: 100%;
+      padding: 10px;
+      background-color: #fcbf1e;
+      /* Jaune */
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Effet hover sur le bouton */
+    .card button:hover {
+      background-color: #f0b90c;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Conteneur principal pour centrer le contenu -->
+  <div class="container">
+    <!-- Carte (encart) -->
+    <div class="card">
+      <h1>Accès Sécurisé</h1>
+      <!-- Champ de saisie du code -->
+      <input type="password" placeholder="Entrez le code d'accès" />
+      <!-- Bouton Valider -->
+      <button>Valider</button>
+    </div>
+
+    <script>
+      document.querySelector('.card button').addEventListener('click', function () {
+        const input = document.querySelector('.card input').value;
+        if (input === '1234') {
+          window.location.href = 'inverstir.html?auth=verified';
+        } else {
+          alert('Code incorrect. Veuillez réessayer.');
+        }
+      });
+
+      
+    </script>
+  </div>
+</body>
+
+</html>

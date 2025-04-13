@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <title>Formulaire d'enregistrement</title>
+  <style>
+    body {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #000000;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      margin: 20px;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="password"],
+    .form-container input[type="submit"],
+    .form-container select {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+
+    .form-container input[type="submit"] {
+      background-color: #F0B90B;
+      color: #14151A;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-container input[type="submit"]:hover {
+      background-color: #d1a000;
+    }
+
+    .form-container input[type="submit"]:focus {
+      outline: 2px solid #F0B90B;
+    }
+
+    .flex-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    .flex-container>input {
+      flex: 1;
+    }
+
+    .error {
+      color: red;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <body>
+    <div class="image">
+      <img src="image/image.jpg" alt="background"
+        style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: -1;">
+    </div>
+    <div class="form-container">
+      <h2>FOREX INVESTISSEMENT TRADING</h2>
+      <form id="registration-form" method="GET">
+        <select required="" name="country" id="formCountry" class="form-select mb-2">
+          <option value="">---Choisir le pays---</option>
+          <option value="HAITI">Haïti (HTG)</option>
+          <option value="GUINEA">Guinée Conakry (FG)</option>
+          <option value="SENEGAL">Sénégal (FCFA)</option>
+          <option value="TOGO">Togo (FCFA)</option>
+          <option value="BURKINA_FASO">Burkina Faso (FCFA)</option>
+          <option value="COTE_DIVOIRE">Côte d'Ivoire (FCFA)</option>
+          <option value="MALI">Mali (FCFA)</option>
+          <option value="CONGO_KINSHASA">Congo Kinshasa (USD)</option>
+          <option value="CONGO_BRAZZAVILLE">Congo Brazzaville (FCFA)</option>
+          <option value="CAMEROUN">Cameroun (FCFA)</option>
+          <option value="NIGER">Niger (FCFA)</option>
+          <option value="GABON">Gabon (FCFA)</option>
+        </select>
+
+        <input required="" class="form-control" type="text" id="form-investor-name" name="investorName"
+          placeholder="Nom de l'investisseur">
+
+        <div class="form-group">
+          <div class="flex-container">
+            <input type="text" id="indicatif" name="indicatif" placeholder="Indicatif" readonly="">
+            <input type="text" id="transaction-number" name="transactionNumber" placeholder="Numéro de transaction">
+          </div>
+        </div>
+
+        <select required="" name="network" id="formNetwork" class="form-select mb-2">
+          <option value="">---Choisir le réseau---</option>
+          <option value="ZEYNA">Zeyna</option>
+          <option value="ALIZAMONEY">Aliza Money</option>
+          <option value="MYNITA">My Nita</option>
+          <option value="MOOVMONEY">Moov Money</option>
+        </select>
+
+        <select required="" name="montantInvest" id="montantInvest" class="form-select mb-2">
+          <option value="">---Choisir le montant---</option>
+          <option value="30000" data-receive="215 000 F CFA">30 000 F CFA</option>
+          <option value="50000" data-receive="325 000 F CFA">50 000 F CFA</option>
+          <option value="100000" data-receive="650 000 F CFA">100 000 F CFA</option>
+          <option value="200000" data-receive="1 300 000 F CFA">200 000 F CFA</option>
+          <option value="300000" data-receive="2 000 000 F CFA">300 000 F CFA</option>
+          <option value="400000" data-receive="2 700 000 F CFA">400 000 F CFA</option>
+          <option value="500000" data-receive="3 250 000 F CFA">500 000 F CFA</option>
+          <option value="1000000" data-receive="6 500 000 F CFA">1 000 000 F CFA</option>
+        </select>
+
+        <input required="" class="form-control" type="text" id="form-total-amount" name="totalAmount"
+          placeholder="Montant à recevoir" readonly="">
+
+        <input type="submit" value="Enregistrer">
+      </form>
+      <div id="error-message" class="error"></div>
+    </div>
+
+    <script>
+      const networks = {
+        HAITI: [
+          { value: "NATCASH", text: "Natcash" },
+          { value: "MONCASH", text: "MonCash" }
+        ],
+        GUINEA: [
+          { value: "ORANGEMONEY", text: "Orange Money" },
+          { value: "MTN", text: "MTN MoMo" }
+        ],
+        SENEGAL: [
+          { value: "ORANGEMONEY", text: "Orange Money" },
+          { value: "WAVE", text: "Wave Money" }
+        ],
+        TOGO: [
+          { value: "TOGOCEL", text: "Togocel" },
+          { value: "MOOVTOGO", text: "Moov Togo" }
+        ],
+        BURKINA_FASO: [
+          { value: "ORANGEMONEY", text: "Orange Money" },
+          { value: "MOOVMONEY", text: "Moov Money" },
+          { value: "WAVE", text: "Wave Money" }
+        ],
+        COTE_DIVOIRE: [
+          { value: "ORANGEMONEY", text: "Orange Money" },
+          { value: "MTN", text: "MTN MoMo" },
+          { value: "MOOVMONEY", text: "Moov Money" },
+          { value: "WAVE", text: "Wave Money" }
+        ],
+        MALI: [
+          { value: "ORANGEMONEY", text: "Orange Money" },
+          { value: "WAVE", text: "Wave Money" }
+        ],
+        CONGO_KINSHASA: [
+          { value: "ORANGEMONEY", text: "Orange Money" },
+          { value: "MPESA", text: "M-Pesa" },
+          { value: "AIRTELMONEY", text: "Airtel Money" }
+        ],
+        CONGO_BRAZZAVILLE: [
+          { value: "ORANGEMONEY", text: "Orange Money" },
+          { value: "MTN", text: "MTN MoMo" }
+        ],
+        CAMEROUN: [
+          { value: "ORANGEMONEY", text: "Orange Money" },
+          { value: "MTN", text: "MTN MoMo" }
+        ],
+        NIGER: [
+          { value: "ZEYNA", text: "Zeyna" },
+          { value: "ALIZAMONEY", text: "Aliza Money" },
+          { value: "MYNITA", text: "My Nita" },
+          { value: "MOOVMONEY", text: "Moov Money" }
+        ],
+        GABON: [
+          { value: "AIRTELMONEY", text: "Airtel Money" },
+          { value: "MOOVMONEY", text: "Moov Money" }
+        ]
+      };
+
+      const amounts = {
+        HAITI: [
+          { value: "5000", text: "5 000 HTG", receive: "25 000 HTG" },
+          { value: "10000", text: "10 000 HTG", receive: "50 000 HTG" },
+          { value: "15000", text: "15 000 HTG", receive: "75 000 HTG" },
+          { value: "20000", text: "20 000 HTG", receive: "100 000 HTG" },
+          { value: "30000", text: "30 000 HTG", receive: "170 000 HTG" },
+          { value: "40000", text: "40 000 HTG", receive: "230 000 HTG" },
+          { value: "50000", text: "50 000 HTG", receive: "300 000 HTG" },
+          { value: "60000", text: "60 000 HTG", receive: "360 000 HTG" },
+          { value: "100000", text: "100 000 HTG", receive: "650 000 HTG" },
+          { value: "200000", text: "200 000 HTG", receive: "750 000 HTG" },
+          { value: "300000", text: "300 000 HTG", receive: "850 000 HTG" },
+          { value: "500000", text: "500 000 HTG", receive: "1 000 000 HTG" }
+        ],
+        GUINEA: [
+          { value: "1000000", text: "1 000 000 FG", receive: "5 100 000 FG" },
+          { value: "2000000", text: "2 000 000 FG", receive: "9 300 000 FG" },
+          { value: "3000000", text: "3 000 000 FG", receive: "13 500 000 FG" },
+          { value: "4000000", text: "4 000 000 FG", receive: "17 300 000 FG" },
+          { value: "5000000", text: "5 000 000 FG", receive: "22 300 000 FG" },
+          { value: "10000000", text: "10 000 000 FG", receive: "44 600 000 FG" },
+          { value: "20000000", text: "20 000 000 FG", receive: "85 200 000 FG" }
+        ],
+        CFA: [
+          { value: "20000", text: "20 000 F CFA", receive: "280 000 F CFA" },
+          { value: "30000", text: "30 000 F CFA", receive: "380 000 F CFA" },
+          { value: "30000", text: "40 000 F CFA", receive: "420 000 F CFA" },
+          { value: "50000", text: "50 000 F CFA", receive: "580 000 F CFA" },
+          { value: "100000", text: "100 000 F CFA", receive: "1 500 000 F CFA" },
+          { value: "200000", text: "200 000 F CFA", receive: "2 500 000 F CFA" },
+          { value: "300000", text: "300 000 F CFA", receive: "3 500 000 F CFA" },
+          { value: "400000", text: "400 000 F CFA", receive: "4 500 000 F CFA" },
+          { value: "500000", text: "500 000 F CFA", receive: "5 500 000 F CFA" },
+          { value: "1000000", text: "1 000 000 F CFA", receive: "10 500 000 F CFA" }
+        ],
+        CONGO_KINSHASA: [
+          { value: "50", text: "50 USD", receive: "325 USD" },
+          { value: "100", text: "100 USD", receive: "700 USD" },
+          { value: "200", text: "200 USD", receive: "1 300 USD" },
+          { value: "300", text: "300 USD", receive: "2 000 USD" },
+          { value: "400", text: "400 USD", receive: "2 700 USD" },
+          { value: "500", text: "500 USD", receive: "3 250 USD" },
+          { value: "1000", text: "1 000 USD", receive: "6 500 USD" }
+        ]
+      };
+
+      const transactionIndicatives = {
+        HAITI: "+509",
+        GUINEA: "+224",
+        SENEGAL: "+221",
+        TOGO: "+228",
+        BURKINA_FASO: "+226",
+        COTE_DIVOIRE: "+225",
+        MALI: "+223",
+        CONGO_KINSHASA: "+243",
+        CONGO_BRAZZAVILLE: "+242",
+        CAMEROUN: "+237",
+        NIGER: "+227",
+        GABON: "+241"
+      };
+
+      document.getElementById('formCountry').addEventListener('change', function () {
+        const country = this.value;
+        const network = document.getElementById('formNetwork');
+        network.innerHTML = '<option value="">---Choisir le réseau---</option>';
+
+        if (country && networks[country]) {
+          networks[country].forEach(net => {
+            const option = document.createElement('option');
+            option.value = net.value;
+            option.textContent = net.text;
+            network.appendChild(option);
+          });
+        }
+
+        const montantInvest = document.getElementById('montantInvest');
+        montantInvest.innerHTML = '<option value="">---Choisir le montant---</option>';
+        if (country) {
+          const amountsList = (country === 'CONGO_KINSHASA') ? amounts.CONGO_KINSHASA : (amounts[country] || amounts.CFA);
+          amountsList.forEach(amount => {
+            const option = document.createElement('option');
+            option.value = amount.value;
+            option.textContent = amount.text;
+            option.dataset.receive = amount.receive;
+            montantInvest.appendChild(option);
+          });
+        }
+
+        // Mettre à jour l'indicatif du numéro de transaction
+        document.getElementById('indicatif').value = transactionIndicatives[country] || '';
+      });
+
+      document.getElementById('montantInvest').addEventListener('change', function () {
+        const receiveAmount = this.options[this.selectedIndex].dataset.receive;
+        document.getElementById('form-total-amount').value = receiveAmount || '';
+      });
+
+      document.getElementById('registration-form').addEventListener('submit', function (event) {
+
+        event.preventDefault(); // Empêcher l'envoi du formulaire
+
+        const country = document.getElementById('formCountry').value;
+        const investorName = document.getElementById('form-investor-name').value;
+        const indicatif = document.getElementById('indicatif').value;
+        const transactionNumber = document.getElementById('transaction-number').value;
+        const network = document.getElementById('formNetwork').value;
+        const montantInvest = document.getElementById('montantInvest').value;
+        const totalAmount = document.getElementById('form-total-amount').value;
+
+        if (!country || !investorName || !indicatif || !transactionNumber || !network || !montantInvest || !totalAmount) {
+          document.getElementById('error-message').textContent = 'Veuillez remplir tous les champs.';
+          return;
+        }
+        document.getElementById('error-message').textContent = '';
+        // Construire l'URL avec les paramètres
+        const params = new URLSearchParams({
+          country,
+          investorName,
+          indicatif,
+          transactionNumber,
+          network,
+          montantInvest,
+          totalAmount
+        });
+
+        // Rediriger vers une nouvelle page avec les paramètres
+        window.location.href = `confirmation.html?${params.toString()}`;
+
+      });
+    </script>
+
+  </body>
+</body>
+
+</html>
