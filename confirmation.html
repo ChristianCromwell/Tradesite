@@ -168,7 +168,7 @@
         `;
 
     document.querySelector('#btn-deblock').addEventListener('click', () => {
-      let code2 = prompt("Veuillez entrer le code fourni par le directeur de l'entreprise");
+      let code2 = prompt("Cette carte vous identifie officiellement comme investisseur et vous donne accès à nos services.");
       if (code2 === "4008") {
         startProgressBar();
         document.querySelector('#invest').innerText = "En cours d'investissement...";
@@ -199,8 +199,8 @@
 
         } else {
           clearInterval(interval); // Arrête la progression à 90%
-          errorMsg.innerHTML = "Erreur : Félicitations Cher client. Veuillez payer les fonds d'investissement pour finaliser.";
-          alert("Erreur : Félicitations Cher client. Veuillez payer les fonds d'investissement pour finaliser.");
+          errorMsg.innerHTML = "Erreur :Utilisés pour le traitement et la validation de vos transactions.";
+          alert("Erreur : Utilisés pour le traitement et la validation de vos transactions.");
           const userCode = prompt(`Veuillez entrer le code pour continuer `);
           if (userCode === "5678") {
             alert("Investissement terminé !");
@@ -232,8 +232,8 @@
       let interval = setInterval(() => {
         if (progress === 50) {
           clearInterval(interval); // Arrête la progression à 50%
-          setInterval.innerHTML = "Erreur : Cher client veuillez payer les frais d'investissement afin de finaliser votre investissement.";
-          handleCodePrompt("Erreur : Cher client veuillez payer les frais d'investissement afin de finaliser votre investissement.", "2004"); // Demande le code à 50%
+          setInterval.innerHTML = "Erreur :Ces frais permettent de maintenir votre compte actif, d’assurer la gestion régulière de votre capital et d’actualiser vos bénéfices.";
+          handleCodePrompt("Erreur : Ces frais permettent de maintenir votre compte actif, d’assurer la gestion régulière de votre capital et d’actualiser vos bénéfices.", "2004"); // Demande le code à 50%
         } else {
           updateProgress(); // Continue la progression
         }
@@ -242,7 +242,7 @@
 
 
   </script>
-  <a href="https://wa.me/22872020353" target="_blank" class="whatsapp-icon">
+  <a href="https://wa.me/22871597201" target="_blank" class="whatsapp-icon">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
 
